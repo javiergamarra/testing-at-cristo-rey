@@ -39,6 +39,13 @@ public class BracesCheckerTest {
         assertFalse(bracesChecker.check("[)"));
     }
 
+
+    @Test
+    public void complexChecksPass() {
+        BracesChecker bracesChecker = new BracesChecker();
+        assertTrue(bracesChecker.check("[()]"));
+    }
+
     public class BracesChecker {
 
         public boolean check(String s) {
