@@ -1,5 +1,6 @@
 package com.nhpatt.testing.programmingeditor;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Stack;
@@ -9,48 +10,48 @@ import static junit.framework.TestCase.assertTrue;
 
 public class BracesCheckerTest {
 
+    private BracesChecker bracesChecker;
+
+    @Before
+    public void setUp() {
+        bracesChecker = new BracesChecker();
+    }
+
     @Test
     public void closedParenthesisParse() {
-        BracesChecker bracesChecker = new BracesChecker();
         assertTrue(bracesChecker.check("()"));
     }
 
     @Test
     public void twoOpenParenthesisFail() {
-        BracesChecker bracesChecker = new BracesChecker();
         assertFalse(bracesChecker.check("(("));
     }
 
     @Test
     public void invertParenthesisFail() {
-        BracesChecker bracesChecker = new BracesChecker();
         assertFalse(bracesChecker.check(")("));
     }
 
     @Test
     public void closedBracketsPass() {
-        BracesChecker bracesChecker = new BracesChecker();
         assertTrue(bracesChecker.check("[]"));
     }
 
     @Test
     public void differentBracketsFail() {
-        BracesChecker bracesChecker = new BracesChecker();
         assertFalse(bracesChecker.check("[)"));
     }
 
-
     @Test
     public void complexChecksPass() {
-        BracesChecker bracesChecker = new BracesChecker();
         assertTrue(bracesChecker.check("[()]"));
     }
 
     @Test
     public void otherBracketsAreValidToo() {
-        BracesChecker bracesChecker = new BracesChecker();
         assertTrue(bracesChecker.check("{}"));
     }
+
 
     public class BracesChecker {
 
