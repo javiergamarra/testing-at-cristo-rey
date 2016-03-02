@@ -2,8 +2,7 @@ package com.nhpatt.testing.programmingeditor;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
@@ -43,20 +42,19 @@ public class BracesCheckerTest {
     public class BracesChecker {
 
         public boolean check(String s) {
-            List<Character> braces = new ArrayList<>();
+            Stack<Character> stack = new Stack<>();
+
             for (Character character : s.toCharArray()) {
                 if (character == '(' || character == '[') {
-                    braces.add(character);
-                } else if (braces.isEmpty()) {
-                    return false;
-                } else if (checkChar(character, braces.get(braces.size() - 1))) {
-                    braces.remove(braces.size() - 1);
+                    stack.push(character);
+                } else if (!stack.isEmpty() && paired(character, stack.peek())) {
+                    stack.pop();
                 }
             }
-            return braces.isEmpty();
+            return stack.isEmpty();
         }
 
-        private boolean checkChar(Character character, Character lastChar) {
+        private boolean paired(Character character, Character lastChar) {
             return character == ')' && lastChar == '(' || character == ']' && lastChar == '[';
         }
 
