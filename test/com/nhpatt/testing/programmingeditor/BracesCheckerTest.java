@@ -2,6 +2,7 @@ package com.nhpatt.testing.programmingeditor;
 
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class BracesCheckerTest {
@@ -10,6 +11,12 @@ public class BracesCheckerTest {
     public void closedParenthesisParse() {
         BracesChecker bracesChecker = new BracesChecker();
         assertTrue(bracesChecker.check("()"));
+    }
+
+    @Test
+    public void twoOpenParenthesisFail() {
+        BracesChecker bracesChecker = new BracesChecker();
+        assertFalse(bracesChecker.check("(("));
     }
 
     public class BracesChecker {
