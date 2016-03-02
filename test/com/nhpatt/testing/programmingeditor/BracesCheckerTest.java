@@ -7,7 +7,7 @@ import static junit.framework.TestCase.assertTrue;
 public class BracesCheckerTest {
 
     @Test
-    public void parenthesisShouldBeClosed() {
+    public void closedParenthesisParse() {
         BracesChecker bracesChecker = new BracesChecker();
         assertTrue(bracesChecker.check("()"));
     }
@@ -15,7 +15,15 @@ public class BracesCheckerTest {
     public class BracesChecker {
 
         public boolean check(String s) {
-            return false;
+            int parenthesis = 0;
+            for (Character character : s.toCharArray()) {
+                if (character == '(') {
+                    parenthesis++;
+                } else {
+                    parenthesis--;
+                }
+            }
+            return parenthesis == 0;
         }
 
     }
