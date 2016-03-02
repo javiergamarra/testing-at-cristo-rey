@@ -28,13 +28,19 @@ public class BracesCheckerTest {
         assertFalse(bracesChecker.check(")("));
     }
 
+    @Test
+    public void closedBracketsPass() {
+        BracesChecker bracesChecker = new BracesChecker();
+        assertTrue(bracesChecker.check("[]"));
+    }
+
     public class BracesChecker {
 
         public boolean check(String s) {
             List<Character> braces = new ArrayList<>();
             for (Character character : s.toCharArray()) {
-                if (character == '(') {
-                    braces.add('(');
+                if (character == '(' || character == '[') {
+                    braces.add(character);
                 } else if (braces.isEmpty()) {
                     return false;
                 } else {
