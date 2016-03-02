@@ -17,11 +17,7 @@ public class BracesCheckerTest {
         public boolean check(String s) {
             int parenthesis = 0;
             for (Character character : s.toCharArray()) {
-                if (character == '(') {
-                    parenthesis++;
-                } else {
-                    parenthesis--;
-                }
+                parenthesis += character == '(' ? 1 : -1;
             }
             return parenthesis == 0;
         }
