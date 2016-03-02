@@ -34,6 +34,12 @@ public class BracesCheckerTest {
         assertTrue(bracesChecker.check("[]"));
     }
 
+    @Test
+    public void differentBracketsFail() {
+        BracesChecker bracesChecker = new BracesChecker();
+        assertFalse(bracesChecker.check("[)"));
+    }
+
     public class BracesChecker {
 
         public boolean check(String s) {
@@ -44,7 +50,11 @@ public class BracesCheckerTest {
                 } else if (braces.isEmpty()) {
                     return false;
                 } else {
-                    braces.remove(braces.size() - 1);
+                    if (character == ')' && braces.get(braces.size() - 1) == '(') {
+                        braces.remove(braces.size() - 1);
+                    } else if (character == ']' && braces.get(braces.size() - 1) == '[') {
+                        braces.remove(braces.size() - 1);
+                    }
                 }
             }
             return braces.isEmpty();
