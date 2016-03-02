@@ -49,15 +49,15 @@ public class BracesCheckerTest {
                     braces.add(character);
                 } else if (braces.isEmpty()) {
                     return false;
-                } else {
-                    if (character == ')' && braces.get(braces.size() - 1) == '(') {
-                        braces.remove(braces.size() - 1);
-                    } else if (character == ']' && braces.get(braces.size() - 1) == '[') {
-                        braces.remove(braces.size() - 1);
-                    }
+                } else if (checkChar(character, braces.get(braces.size() - 1))) {
+                    braces.remove(braces.size() - 1);
                 }
             }
             return braces.isEmpty();
+        }
+
+        private boolean checkChar(Character character, Character lastChar) {
+            return character == ')' && lastChar == '(' || character == ']' && lastChar == '[';
         }
 
     }
