@@ -46,23 +46,29 @@ public class BracesCheckerTest {
         assertTrue(bracesChecker.check("[()]"));
     }
 
+    @Test
+    public void otherBracketsAreValidToo() {
+        BracesChecker bracesChecker = new BracesChecker();
+        assertTrue(bracesChecker.check("{}"));
+    }
+
     public class BracesChecker {
 
         public boolean check(String s) {
             Stack<Character> stack = new Stack<>();
 
             for (Character character : s.toCharArray()) {
-                if (character == '(' || character == '[') {
-                    stack.push(character);
-                } else if (!stack.isEmpty() && paired(character, stack.peek())) {
+                if (!stack.isEmpty() && paired(character, stack.peek())) {
                     stack.pop();
+                } else {
+                    stack.push(character);
                 }
             }
             return stack.isEmpty();
         }
 
         private boolean paired(Character character, Character lastChar) {
-            return character == ')' && lastChar == '(' || character == ']' && lastChar == '[';
+            return character == ')' && lastChar == '(' || character == ']' && lastChar == '[' || character == '}' && lastChar == '{';
         }
 
     }
