@@ -52,6 +52,22 @@ public class BracesCheckerTest {
         assertTrue(bracesChecker.check("{}"));
     }
 
+    @Test
+    public void hugeValidTest() {
+        for (String string : valid) {
+            assertTrue(bracesChecker.check(string));
+        }
+    }
+
+    @Test
+    public void hugeInvalidTest() {
+        for (String string : invalid) {
+            assertFalse(bracesChecker.check(string));
+        }
+    }
+
+    String[] valid = {"()", "[]", "{}", "(){}[]", "([{}])", "({})[({})]", "(({{[[]]}}))", "{}({})[]"};
+    String[] invalid = {"[(])", "(}", "(})", ")(}{][", "())({}}{()][][", "(((({{", "}]]))}])",};
 
     public class BracesChecker {
 
@@ -68,8 +84,8 @@ public class BracesCheckerTest {
             return stack.isEmpty();
         }
 
-        private boolean paired(Character character, Character lastChar) {
-            return character == ')' && lastChar == '(' || character == ']' && lastChar == '[' || character == '}' && lastChar == '{';
+        private boolean paired(char a, char b) {
+            return a == ')' && b == '(' || a == ']' && b == '[' || a == '}' && b == '{';
         }
 
     }
